@@ -18,11 +18,13 @@ for iter = 1:num_iters,
     %       of the cost function (computeCost) and gradient here.
     %
     h_x = X*theta;
-    h_x_y = h_x - y;
-    h_x_y_x = h_x_y .* X(:,2);
+    h_x_y = h_x - y; %  d/ d(theta 0) [J]
+    h_x_y_x = h_x_y .* X(:,2); % d/ d(theta 1) [J]
 
+    % applying gradient descent to each of the theta values
     theta(1) = theta(1) - (( alpha/m ) * sum(h_x_y) );
     theta(2) = theta(2) - (( alpha/m ) * sum(h_x_y_x) );
+
 
 
 
