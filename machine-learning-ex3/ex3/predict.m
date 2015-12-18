@@ -5,7 +5,7 @@ function p = predict(Theta1, Theta2, X)
 
 % Useful values
 m = size(X, 1);
-num_labels = size(Theta2, 1);
+num_labels = size(Theta2, 1); % s(j+1) by sj + 1
 
 % You need to return the following variables correctly 
 p = zeros(size(X, 1), 1);
@@ -21,6 +21,27 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% theta1 = 25 by 401
+%  x/a1 = 5000 by 400
+%see the videos for terminology
+X = [ones(m,1), X]; % adding the bias element as 1
+
+
+a1 = X;
+z2 = Theta1 * a1';
+a2 = sigmoid(z2);
+% a2 is now 25 by 5000
+% theta2 is 10 by 26
+a2 = [ones(1,m);a2];
+
+z3 = Theta2 * a2;
+a3 = sigmoid(z3);
+
+% a3 is size 10 by 5000 (one column containing classifier results for each of the 5000 examples)
+
+
+[value, index] = max(a3,[], 1); % dim 1 is column; 2 or row
+p = index';
 
 
 
